@@ -248,6 +248,64 @@
       color: #8b7355;
       font-weight: bold;
     }
+
+    /* Nouvel encadré pour Objets à découvrir */
+    .items-box {
+      background: rgba(254, 252, 248, 0.95);
+      border: 2px solid #8b7355;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 6px 20px rgba(139, 115, 85, 0.25);
+      max-width: 900px;
+      margin: 40px auto 60px;
+      color: #4a3a1a;
+    }
+
+    /* Nouvel encadré pour Activités à faire */
+    .activities-box {
+      background: rgba(254, 252, 248, 0.95);
+      border: 2px solid #8b7355;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 6px 20px rgba(139, 115, 85, 0.25);
+      max-width: 900px;
+      margin: 40px auto 60px;
+      color: #4a3a1a;
+      font-size: 1.15em;
+      line-height: 1.5em;
+    }
+
+    .activities-box ul {
+      padding-left: 20px;
+      list-style-type: none;
+    }
+
+    .activities-box li {
+      margin-bottom: 20px;
+      font-weight: 500;
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .activities-box li::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: 10px;
+      font-size: 1.3em;
+    }
+
+    .activities-box li strong {
+      display: block;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+      color: #8b7355;
+    }
+
+    .activities-box li p {
+      margin: 0;
+      color: #5e4a35;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -296,19 +354,41 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section items-box">
       <h2>Objets à découvrir</h2>
       <ul class="items-list">
         <li>Cannes de collection et bâtons de marche</li>
         <li>Bibelots anciens</li>
         <li>Vaisselle vintage</li>
         <li>Outillage traditionnel</li>
-        <li>Plantes </li>
+        <li>Plantes rares</li>
         <li>Autres trésors anciens</li>
       </ul>
     </div>
 
-    <!-- Nouvelle section Pourquoi venir ? -->
+    <div class="section activities-box">
+      <h2>Activités à faire dans la région</h2>
+      <ul>
+        <li data-icon="🪨">
+          <strong>Le Caillou qui Bique – Montignies-sur-Roc</strong>
+          <p>Situé en bordure de la Grande Honnelle, ce rocher imposant de 20 à 25 mètres de hauteur est un vestige géologique vieux de plusieurs millions d’années. Accessible via une promenade de 6,5 km, il offre une immersion dans la nature luxuriante. Une halte idéale pour les amoureux de la nature et les randonneurs.</p>
+        </li>
+        <li data-icon="🖼️">
+          <strong>Espace Muséal Émile Verhaeren – Roisin</strong>
+          <p>Ce musée dédié au poète belge Émile Verhaeren présente une collection de documents historiques et de toiles illustrant ses liens avec l'art et la littérature avant-gardistes de son époque. Situé dans le cadre paisible de Roisin, il est ouvert sur rendez-vous via l’ASBL Mémoire d’Émile Verhaeren.</p>
+        </li>
+        <li data-icon="🦋">
+          <strong>La Ferme aux Papillons – Wargnies-le-Grand</strong>
+          <p>Ce centre d’observation permet de découvrir des centaines de papillons exotiques évoluant en liberté autour des visiteurs. Ouvert du 12 avril au 7 septembre, avec des horaires adaptés selon la période, c’est une expérience fascinante pour petits et grands.</p>
+        </li>
+        <li data-icon="🌳">
+          <strong>Les Étangs de Roisin</strong>
+          <p>Situés au cœur du Parc Naturel des Hauts-Pays, ces étangs offrent un cadre paisible pour la pêche, la promenade ou simplement la détente. Le Chalet des Étangs, bordé de trois étangs de pêche, propose une terrasse semi-couverte idéale pour se restaurer ou boire un verre en pleine nature.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Pourquoi venir ? -->
     <div class="section why-come">
       <h2>Pourquoi venir à notre brocante ?</h2>
       <ul>
