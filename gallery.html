@@ -79,6 +79,57 @@
       border-color: #a88c6d;
     }
 
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox.show {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+    }
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      background: rgba(0,0,0,0.3);
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+    .nav-button:hover {
+      background: rgba(0,0,0,0.6);
+    }
+    .prev-button {
+      left: 30px;
+    }
+    .next-button {
+      right: 30px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -97,16 +148,75 @@
     <h1>Galerie Photos</h1>
   </header>
 
-  <div class="gallery" aria-label="Galerie photos de la brocante">
-    <script>
-      for (let i = 1; i <= 124; i++) {
-        document.write(`<img src="${i}.jpg" alt="Photo ${i}">`);
-      }
-    </script>
+  <div class="gallery" aria-label="Galerie photos de la brocante" id="gallery"></div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <button class="nav-button prev-button" onclick="showPrev()">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Image agrandie">
+    <button class="nav-button next-button" onclick="showNext()">&#10095;</button>
   </div>
 
   <footer>
     <p>&copy; 2025 Brocante de Roisin - Tous droits réservés</p>
   </footer>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentIndex = 0;
+    const totalImages = 124;
+    const images = [];
+
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement('img');
+      img.src = `${i}.jpg`;
+      img.alt = `Photo ${i}`;
+      images.push(`${i}.jpg`);
+      img.dataset.index = i - 1;
+      img.addEventListener('click', () => {
+        currentIndex = parseInt(img.dataset.index);
+        openLightbox(currentIndex);
+      });
+      gallery.appendChild(img);
+    }
+
+    function openLightbox(index) {
+      lightboxImg.src = images[index];
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      lightboxImg.src = "";
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      openLightbox(currentIndex);
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      openLightbox(currentIndex);
+    }
+
+    // Clavier : ← → Esc
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('show')) return;
+
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Ferme la lightbox si clic sur fond noir
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+        closeLightbox();
+      }
+    });
+  </script>
 </body>
 </html>
